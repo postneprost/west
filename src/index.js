@@ -3,16 +3,27 @@ import Game from './Game.js';
 import TaskQueue from './TaskQueue.js';
 import SpeedRate from './SpeedRate.js';
 
-class Duck extends Card {
+class Creature extends Card {
+
+    getDescriptions() {
+        return [
+            getCreatureDescription(this),
+            super.getDescriptions(this)
+        ]
+    }
+
+}
+
+class Duck extends Creature {
     constructor() {
         super('Мирная утка', 2);
     }
 
-    quacks = function () { console.log('quack') };
-    swims = function () { console.log('float: both;') };
+    quacks() { console.log('quack') };
+    swims() { console.log('float: both;') };
 }
 
-class Dog extends Card {
+class Dog extends Creature {
     constructor() {
         super('Пес-бандит', 3);
     }
@@ -21,6 +32,7 @@ class Dog extends Card {
 // Отвечает является ли карта уткой.
 function isDuck(card) {
     return card instanceof Duck;
+    //return card && card.quacks && card.swims;
 }
 
 // Отвечает является ли карта собакой.
